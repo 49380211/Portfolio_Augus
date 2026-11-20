@@ -1,10 +1,13 @@
 /* Scroll suave con Lenis. */
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
 import { reduce } from './utils.js';
 
 export let lenis = null;
 
 export function initScroll() {
-  if (window.Lenis && !reduce) {
+  if (!reduce) {
     lenis = new Lenis({ lerp: .09, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);

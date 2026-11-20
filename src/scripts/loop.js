@@ -1,4 +1,5 @@
 /* Un solo bucle por frame, en el mismo orden que tenía el script original. */
+import { gsap } from 'gsap';
 import { lerp } from './utils.js';
 import { lenis } from './scroll.js';
 import { updateWork } from './work-carousel.js';

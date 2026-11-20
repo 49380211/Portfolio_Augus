@@ -1,4 +1,4 @@
-/* Helpers compartidos. gsap y ScrollTrigger vienen del CDN (pasan a npm en la Parte 6). */
+/* Helpers compartidos. */
 export const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const vw = () => window.innerWidth, vh = () => window.innerHeight;
 export const clamp = (v, a, b) => Math.max(a, Math.min(b, v));

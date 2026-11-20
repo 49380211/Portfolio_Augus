@@ -1,4 +1,6 @@
 /* Entrada: el nombre se acomoda, brotan los lápices de las esquinas y suben las tarjetas. */
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { mob, reduce } from './utils.js';
 import { reveals } from './reveals.js';
 import { bounds } from './work-carousel.js';

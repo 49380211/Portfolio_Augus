@@ -1,4 +1,5 @@
 /* Despiece isométrico del gabinete: fuente común para la tarjeta del carrusel y el caso de estudio. */
+import { gsap } from 'gsap';
 
 let src = null, parts = null, exOf = null;
 export let isoReady = false;

@@ -1,4 +1,6 @@
 /* Mail: copia la dirección y abre el correo si se puede. */
+import { gsap } from 'gsap';
+
 let toast = null, toastT;
 
 export const say = html => { toast.innerHTML = html; toast.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => toast.classList.remove('on'), 2600); };

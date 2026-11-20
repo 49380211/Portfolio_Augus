@@ -1,4 +1,6 @@
 /* Punto de entrada: arranca cada módulo en el mismo orden que el script original. */
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initScroll, initNavLinks, lenis } from './scroll.js';
 import { initIso } from './iso.js';
 import { initCopy } from './copy.js';

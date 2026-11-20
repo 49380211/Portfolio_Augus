@@ -1,4 +1,5 @@
 /* Apariciones al entrar en pantalla. */
+import { gsap } from 'gsap';
 import { onView } from './utils.js';
 
 export function reveals() {

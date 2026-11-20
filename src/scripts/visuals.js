@@ -1,4 +1,5 @@
 /* Dibujos de línea y visuales de cada proyecto (SVG + GSAP). */
+import { gsap } from 'gsap';
 import { INK, PAPER, ACC, reduce } from './utils.js';
 import { isoAnimated, isoReady } from './iso.js';
 import { imgTag } from './images.js';
