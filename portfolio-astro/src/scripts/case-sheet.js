@@ -3,6 +3,7 @@ import { vw, vh, pad2, reduce } from './utils.js';
 import { P } from './projects.js';
 import { V } from './visuals.js';
 import { lenis } from './scroll.js';
+import { imgTag } from './images.js';
 
 let sheet = null, sVis = null;
 let openI = -1, run = null, origin = [50, 50];
@@ -19,8 +20,8 @@ export function openCase(i, e, src) {
   document.getElementById('sRows').innerHTML = p.rows.map(r => '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join('');
   document.getElementById('sTags').innerHTML = p.tags + (p.link ? '<a class="s-link" href="' + p.link + '" target="_blank" rel="noopener">Ver el sitio ↗</a>' : '');
   sVis.innerHTML = V[p.vis].html();
-  const brw = (src, cap) => '<figure style="margin:0"><div class="brw"><div class="bar"><i></i><i></i><i></i><span>cdm · centro de medicina</span></div><img src="' + src + '" alt="' + cap + '" loading="lazy"></div><figcaption>' + cap + '</figcaption></figure>';
-  document.getElementById('sGal').innerHTML = (p.gallery || []).map(g => g[0] === 'duo' ? '<div class="duo">' + brw(g[1], g[2]) + '<figure style="margin:0"><div class="phone"><img src="' + g[3] + '" alt="El sitio en el celular" loading="lazy"></div><figcaption style="text-align:center">En el celular</figcaption></figure></div>' : brw(g[1], g[2])).join('');
+  const brw = (src, cap) => '<figure style="margin:0"><div class="brw"><div class="bar"><i></i><i></i><i></i><span>cdm · centro de medicina</span></div>' + imgTag(src, cap) + '</div><figcaption>' + cap + '</figcaption></figure>';
+  document.getElementById('sGal').innerHTML = (p.gallery || []).map(g => g[0] === 'duo' ? '<div class="duo">' + brw(g[1], g[2]) + '<figure style="margin:0"><div class="phone">' + imgTag(g[3], 'El sitio en el celular') + '</div><figcaption style="text-align:center">En el celular</figcaption></figure></div>' : brw(g[1], g[2])).join('');
   const r = (p.src || p.el.querySelector('.vis')).getBoundingClientRect();
   origin = [(r.left + r.width / 2) / vw() * 100, (r.top + r.height / 2) / vh() * 100];
   if (lenis) lenis.stop(); document.body.classList.add('lock');

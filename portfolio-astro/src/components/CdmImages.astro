@@ -1,0 +1,17 @@
+---
+/* Pasa las imágenes de CDM por astro:assets y publica el mapa de URLs ya optimizadas.
+   Hace falta este puente porque la galería y el visual de CDM los arma el JS en runtime,
+   y <Image /> sólo corre en build. */
+import { getImage } from 'astro:assets';
+import { cdmImages } from '../data/cdm';
+
+const entries = await Promise.all(
+  Object.entries(cdmImages).map(async ([key, img]) => {
+    const opt = await getImage({ src: img, format: 'webp', quality: 82 });
+    return [key, { src: opt.src, width: img.width, height: img.height }];
+  })
+);
+const map = Object.fromEntries(entries);
+---
+
+<script type="application/json" id="cdm-images" set:html={JSON.stringify(map)} />

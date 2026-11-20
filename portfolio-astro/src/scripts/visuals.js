@@ -1,6 +1,7 @@
 /* Dibujos de línea y visuales de cada proyecto (SVG + GSAP). */
 import { INK, PAPER, ACC, reduce } from './utils.js';
 import { isoAnimated, isoReady } from './iso.js';
+import { imgTag } from './images.js';
 
 const L = (x1, y1, x2, y2, c, w) => '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + (c || INK) + '" stroke-width="' + (w || 1.2) + '" stroke-linecap="round"/>';
 const R = (x, y, w, h, f, c, r) => '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + (r == null ? 3 : r) + '" fill="' + (f || 'none') + '" stroke="' + (c || INK) + '" stroke-width="1"/>';
@@ -73,7 +74,7 @@ export const V = {
     }
   },
   cdm: {
-    html: () => '<div class="v-cdm"><div class="brw"><div class="bar"><i></i><i></i><i></i><span>cdm · centro de medicina</span></div><img src="cdm/s-hero.jpg" alt="Portada del sitio de CDM Centro de Medicina" loading="lazy"></div></div>',
+    html: () => '<div class="v-cdm"><div class="brw"><div class="bar"><i></i><i></i><i></i><span>cdm · centro de medicina</span></div>' + imgTag('cdm/s-hero.jpg', 'Portada del sitio de CDM Centro de Medicina') + '</div></div>',
     run(root) { gsap.fromTo(root.querySelector('.brw'), { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out', delay: .3 }); return null; }
   },
   pc: { html: () => '<div class="v-pc"><svg viewBox="130 120 390 490" class="pcSvg"></svg></div>', run(root, big) { if (big && isoReady) return isoAnimated(root.querySelector('svg')); return null; } }
