@@ -10,3 +10,18 @@
       <a class="small ul-link" href="https://www.linkedin.com/in/augusto-daniel-s%C3%A1nchez-gercovich-7a971b403/" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
   </footer>
+
+<style is:global>
+/* contacto */
+.foot{padding:clamp(60px,10vh,120px) var(--gut) 24px;border-top:1px solid var(--line)}
+.foot .hb{display:block;white-space:nowrap;font-size:min(14.5vw,34svh);text-align:center;margin:0 0 30px}
+.foot .hb span{display:inline-block}
+.foot .row{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:end;font-size:13px}
+.foot .mail{font-size:clamp(20px,2.4vw,34px);font-weight:500;letter-spacing:-.02em}
+.foot .row > :last-child{justify-self:end}
+
+@media (max-width:820px){
+  .foot .row{grid-template-columns:1fr;justify-items:start}
+  .foot .row > :last-child{justify-self:start}
+}
+</style>

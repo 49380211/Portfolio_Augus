@@ -3,3 +3,10 @@
 ---
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<style is:global>
+/* aviso */
+.toast{position:fixed;left:50%;top:60px;z-index:60;transform:translate(-50%,-14px);opacity:0;pointer-events:none;background:var(--ink);color:#F4F4F1;padding:12px 18px;border-radius:99px;font-size:14px;transition:opacity .35s,transform .5s cubic-bezier(.2,.8,.2,1)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast b{color:var(--accent);font-weight:500}
+</style>

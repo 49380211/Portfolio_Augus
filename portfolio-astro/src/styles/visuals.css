@@ -1,0 +1,48 @@
+/* Visuales de los proyectos (dibujo de línea, tinta + naranja).
+   Los genera visuals.js en runtime, así que no pueden ir en un componente. */
+.v-dash{display:grid;place-items:center;background:#E3E4DE}
+.laptop{width:66%;position:relative}
+.laptop .scr{aspect-ratio:16/10;background:#121613;border-radius:10px 10px 0 0;padding:2.2%}
+.laptop .scr > div{width:100%;height:100%;background:#FAFAF8;border-radius:2px;overflow:hidden}
+.laptop .scr svg{width:100%;height:100%;display:block}
+.laptop .base{height:10px;margin:0 -7%;background:linear-gradient(#D2D3CD,#B9BAB4);border-radius:0 0 10px 10px}
+.laptop .base::before{content:"";display:block;width:16%;height:4px;margin:0 auto;background:#A9AAA4;border-radius:0 0 6px 6px}
+.v-road{background:#DCDDD7;overflow:hidden}
+.v-road .car{position:absolute;left:21%;width:58%;bottom:34%}
+.v-road .car svg{width:100%;height:auto;display:block;overflow:visible}
+.v-road .wh{transform-box:fill-box;transform-origin:center;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.v-road .ground{position:absolute;left:0;right:0;top:66%;height:1.5px;background:var(--ink)}
+.v-road .dash{position:absolute;left:0;top:calc(66% + 4%);height:2px;width:200%;background:repeating-linear-gradient(90deg,var(--ink) 0 30px,transparent 30px 76px);animation:road 1.1s linear infinite;opacity:.45}
+.v-road .hills{position:absolute;left:0;top:34%;width:200%;height:32%;animation:road 10s linear infinite}
+@keyframes road{to{transform:translateX(-50%)}}
+.v-road .steps{position:absolute;left:4%;right:4%;bottom:5%;display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2)}
+.v-road .steps b{font-weight:500;color:var(--accent)}
+.v-lesson{display:grid;place-items:center;background:#ECEBE6}
+.v-lesson .card{width:min(62%,440px);background:#fff;border-radius:12px;padding:5% 5.5%;box-shadow:0 24px 44px rgba(18,22,19,.08)}
+.v-lesson .bar{height:4px;border-radius:9px;background:#ECEBE6;overflow:hidden;margin-bottom:16px}
+.v-lesson .bar i{display:block;height:100%;width:0;background:var(--accent)}
+.v-lesson .kind{font-size:12px;color:var(--muted);margin-bottom:6px}
+.v-lesson .q{font-weight:600;font-size:clamp(14px,1.5vw,22px);letter-spacing:-.02em;margin-bottom:12px;min-height:2.5em;line-height:1.2}
+.v-lesson .opts{display:grid;gap:7px;min-height:6.6em}
+.v-lesson .opts span{display:block;border:1px solid var(--line);border-radius:6px;padding:.5em .8em;font-size:clamp(11px,1vw,14px);font-family:ui-monospace,Menlo,Consolas,monospace;transition:background .3s,color .3s,border-color .3s}
+.v-lesson .opts span.ok{border-color:var(--ink);background:var(--ink);color:#fff}
+.v-lesson .code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:clamp(11px,1vw,14px);background:var(--ink);color:#EDEDEA;border-radius:6px;padding:1em;min-height:6.6em;white-space:pre-wrap}
+.v-lesson .code em{font-style:normal;color:var(--accent)}
+.v-lesson .code u{text-decoration:none;display:inline-block;width:.55em;height:1.05em;background:var(--accent);vertical-align:-.15em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.v-cdm{display:grid;place-items:center;background:#EAE4DE;padding:6%}
+.brw{width:100%;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 24px 50px rgba(74,55,51,.18),0 0 0 1px rgba(0,0,0,.06)}
+.brw .bar{display:flex;align-items:center;gap:6px;height:clamp(18px,2vw,28px);padding:0 10px;background:#F1EEEA;border-bottom:1px solid rgba(0,0,0,.06)}
+.brw .bar i{width:8px;height:8px;border-radius:50%;background:#D9D3CD}
+.brw .bar span{margin:0 auto;font-size:clamp(8px,.75vw,11px);color:#8B7E78;background:#fff;border-radius:4px;padding:2px 18px}
+.brw img{display:block;width:100%;height:auto}
+.v-cdm .brw{width:88%}
+.v-pc{display:grid;place-items:center;background:#E6E7E2}
+.v-pc svg{width:62%;height:86%;overflow:visible}
+.v-pc text{font-family:var(--f-text)!important}
+.v-pipe{display:grid;place-items:center;background:#E3E4DE;padding:4% 6%}
+.v-pipe svg{width:100%;height:auto;overflow:visible}
+.v-pipe text{font-family:var(--f-text);font-size:15px;fill:var(--ink)}
+.v-pipe .k{font-size:11px;fill:var(--muted)}
+@media (prefers-reduced-motion:reduce){ .v-road .dash,.v-road .hills,.v-road .wh{animation:none} }

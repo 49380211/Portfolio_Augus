@@ -3,3 +3,11 @@
 ---
 
   <div class="marq" aria-hidden="true"><div class="in" id="marq"></div></div>
+
+<style is:global>
+/* cinta */
+.marq{overflow:hidden;padding:clamp(30px,6vh,70px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.marq .in{display:flex;white-space:nowrap;will-change:transform}
+.marq span{font-size:clamp(70px,12vw,200px);padding-right:.3em}
+.marq span i{font-style:normal;color:var(--accent)}
+</style>
