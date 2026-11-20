@@ -1,0 +1,23 @@
+---
+// <head>, fuentes y estilos globales. Contenido copiado literal del index.html original.
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Augusto Gercovich (Copy)</title>
+<meta name="description" content="Portfolio de Augusto Gercovich: tecnología, producto y procesos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+</head>
+<body class="loading">
+<slot />
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script is:inline src="/main.js"></script>
+</body>
+</html>
