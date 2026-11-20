@@ -1,7 +1,7 @@
 /* Hoja del caso de estudio: se abre desde la tarjeta y se cierra scrolleando hasta el final. */
 import { gsap } from 'gsap';
 import { vw, vh, pad2, reduce } from './utils.js';
-import { P } from './projects.js';
+import { P } from '../data/projects';
 import { V } from './visuals.js';
 import { lenis } from './scroll.js';
 import { imgTag } from './images.js';

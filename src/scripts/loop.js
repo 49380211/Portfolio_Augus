@@ -19,7 +19,7 @@ export function startLoop() {
     const sy = lenis ? lenis.scroll : window.scrollY; sv = lerp(sv, sy - lastY, .2); lastY = sy;
     const f = { now, t, sy, sv, openI: getOpenI() };
 
-    updateWork(f);
+    updateWork();
     updateMarquee(f);
     darkFrame();
     updatePill(f);

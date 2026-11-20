@@ -1,6 +1,6 @@
 /* Carrusel de proyectos: avanza con el scroll vertical mientras la sección queda fija. */
 import { vw, vh, clamp, lerp, pad2, reduce, onView } from './utils.js';
-import { P } from './projects.js';
+import { P } from '../data/projects';
 import { V } from './visuals.js';
 import { isoStatic } from './iso.js';
 
@@ -28,7 +28,7 @@ export function initWork(openCase) {
 export const bounds = () => { drag.min = Math.min(0, vw() - track.scrollWidth); if (sizeWorkRef) sizeWorkRef(); };
 function sizeWork() { const dist = Math.max(0, track.scrollWidth - vw()); work.style.height = (vh() + dist * 1.15) + 'px'; }
 
-export function updateWork(f) {
+export function updateWork() {
   // carrusel con inercia y leve inclinación según la velocidad
   // carrusel: la posición sale de cuánto bajaste dentro de la sección
   const wr = work.getBoundingClientRect(), wp = clamp(-wr.top / Math.max(1, wr.height - vh()), 0, 1);
