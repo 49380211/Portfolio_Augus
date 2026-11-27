@@ -5,7 +5,6 @@ import { isoAnimated, isoReady } from './iso.js';
 import { imgTag } from './images.js';
 
 const L = (x1, y1, x2, y2, c, w) => '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + (c || INK) + '" stroke-width="' + (w || 1.2) + '" stroke-linecap="round"/>';
-const R = (x, y, w, h, f, c, r) => '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + (r == null ? 3 : r) + '" fill="' + (f || 'none') + '" stroke="' + (c || INK) + '" stroke-width="1"/>';
 const wheel = cx => '<g class="wh"><circle cx="' + cx + '" cy="96" r="18" fill="' + INK + '"/><circle cx="' + cx + '" cy="96" r="9" fill="' + PAPER + '"/>' + [0, 2.094, 4.189].map(a => L(cx, 96, (cx + 8 * Math.cos(a)).toFixed(1), (96 + 8 * Math.sin(a)).toFixed(1), INK, 2)).join('') + '</g>';
 const carSVG = () => '<svg viewBox="0 0 300 114.5"><g transform="translate(302 0) scale(-1 1)" stroke="' + INK + '" stroke-linejoin="round">'
   + '<polygon points="20,96 22,77 36,68 70,64 98,58 118,40 146,30 180,29 210,36 236,52 262,60 278,70 282,92 276,96" fill="' + PAPER + '" stroke-width="1.5"/>'
@@ -13,16 +12,8 @@ const carSVG = () => '<svg viewBox="0 0 300 114.5"><g transform="translate(302 0
   + '<g fill="none" stroke-width=".8" opacity=".55"><polyline points="36,68 70,74 98,58"/><polyline points="70,74 150,57 236,52"/><polyline points="150,57 160,94"/><polyline points="236,52 250,74 278,70"/><polyline points="250,74 262,94"/><line x1="166" y1="34" x2="168" y2="55"/></g>'
   + '<circle cx="32" cy="74" r="4" fill="' + PAPER + '" stroke-width="1"/><rect x="266" y="83" width="13" height="5" fill="' + ACC + '" stroke="none"/></g>'
   + wheel(80) + wheel(224) + '</svg>';
-const dashSVG = () => '<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">' + '<rect width="320" height="200" fill="#FAFAF8"/>' + R(0, 0, 58, 200, '#F0F0EC', 'none', 0)
-  + '<circle cx="16" cy="18" r="6" fill="' + INK + '"/>' + [44, 60, 76, 92, 108].map((y, i) => L(12, y, i ? 44 : 48, y, i === 1 ? ACC : '#9C9F9A', i === 1 ? 2 : 1.2)).join('')
-  + L(70, 18, 150, 18, INK, 2) + L(70, 28, 120, 28, '#B8BAB5')
-  + [0, 1, 2].map(i => R(70 + i * 82, 40, 74, 44, '#fff', '#DADBD6', 4) + '<circle cx="' + (81 + i * 82) + '" cy="52" r="4" fill="' + (i === 2 ? ACC : '#121613') + '"/>' + L(79 + i * 82, 70, 122 + i * 82, 70, '#121613', 2) + L(79 + i * 82, 77, 108 + i * 82, 77, '#B8BAB5')).join('')
-  + R(70, 94, 120, 94, '#fff', '#DADBD6', 4) + [30, 46, 24, 56, 40, 50].map((h, i) => R(80 + i * 17, 176 - h, 10, h, i === 3 ? ACC : '#121613', 'none', 1)).join('')
-  + R(198, 94, 110, 94, '#fff', '#DADBD6', 4) + [[206, 106, 60], [222, 122, 52], [212, 138, 44], [236, 154, 54], [228, 170, 38]].map((g, i) => R(g[0], g[1], g[2], 8, i === 2 ? ACC : '#121613', 'none', 2)).join('') + '</svg>';
-
 /* ---------- visuales (se usan en el carrusel y en el caso) ---------- */
 export const V = {
-  dash: { html: () => '<div class="v-dash"><div class="laptop"><div class="scr"><div>' + dashSVG() + '</div></div><div class="base"></div></div></div>', run() {} },
   pipe: {
     html: () => {
       const n = [['WhatsApp', 'texto · audio · foto'], ['Ordena', 'por tipo y obra'], ['Alerta', 'demoras · faltantes'], ['Dashboard', 'estado de la obra']];
@@ -74,6 +65,7 @@ export const V = {
       return tl;
     }
   },
+  bdweb: { html: () => '<div class="v-cdm" style="background:#E3E6EE"><div class="brw"><div class="bar"><i></i><i></i><i></i><span>builddata.com.ar</span></div>' + imgTag('bd/dashboard.jpg', 'Dashboard de una obra en BuildData') + '</div></div>', run() { return null; } },
   cdm: {
     html: () => '<div class="v-cdm"><div class="brw"><div class="bar"><i></i><i></i><i></i><span>cdm · centro de medicina</span></div>' + imgTag('cdm/s-hero.jpg', 'Portada del sitio de CDM Centro de Medicina') + '</div></div>',
     run(root) { gsap.fromTo(root.querySelector('.brw'), { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out', delay: .3 }); return null; }

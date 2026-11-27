@@ -4,9 +4,10 @@ import { P } from '../data/projects';
 import { V } from './visuals.js';
 import { isoStatic } from './iso.js';
 
-export const drag = { on: false, x: 0, sx: 0, cur: 0, tgt: 0, v: 0, moved: false, min: 0 };
+/* posición actual del carrusel y cuánto se movió en el último frame (para la inclinación) */
+const pos = { cur: 0, v: 0 };
 export let track = null;
-let work = null, sizeWorkRef = null;
+let work = null;
 
 /* el click abre el caso de estudio: la función la inyecta main.js */
 export function initWork(openCase) {
@@ -17,25 +18,24 @@ export function initWork(openCase) {
     track.appendChild(a); p.el = a;
     const vis = a.querySelector('.vis');
     if (p.card === 'pc') isoStatic(vis.querySelector('svg'));
-    else if (p.card !== 'dash') onView(a, () => V[p.card].run(vis), .2);
-    vis.addEventListener('click', e => { if (drag.moved) { e.preventDefault(); return; } openCase(i, e); });
+    else onView(a, () => V[p.card].run(vis), .2);
+    vis.addEventListener('click', e => openCase(i, e));
   });
-  bounds(); window.addEventListener('resize', bounds);
   work = document.getElementById('proyectos');
-  sizeWork(); sizeWorkRef = sizeWork; window.addEventListener('resize', sizeWork); window.addEventListener('load', sizeWork);
+  bounds(); window.addEventListener('resize', bounds); window.addEventListener('load', bounds);
 }
 
-export const bounds = () => { drag.min = Math.min(0, vw() - track.scrollWidth); if (sizeWorkRef) sizeWorkRef(); };
-function sizeWork() { const dist = Math.max(0, track.scrollWidth - vw()); work.style.height = (vh() + dist * 1.15) + 'px'; }
+/* el alto de la sección define cuánto hay que bajar para recorrer todo el carrusel */
+export const bounds = () => { const dist = Math.max(0, track.scrollWidth - vw()); work.style.height = (vh() + dist * 1.15) + 'px'; };
 
 export function updateWork() {
-  // carrusel con inercia y leve inclinación según la velocidad
-  // carrusel: la posición sale de cuánto bajaste dentro de la sección
+  // la posición sale de cuánto bajaste dentro de la sección; la inclinación, de la velocidad
   const wr = work.getBoundingClientRect(), wp = clamp(-wr.top / Math.max(1, wr.height - vh()), 0, 1);
-  const prev = drag.cur; drag.cur = lerp(drag.cur, wp * Math.min(0, vw() - track.scrollWidth), reduce ? 1 : .14); drag.v = drag.cur - prev;
+  const prev = pos.cur; pos.cur = lerp(pos.cur, wp * Math.min(0, vw() - track.scrollWidth), reduce ? 1 : .14); pos.v = pos.cur - prev;
   document.getElementById('workBar').style.transform = 'scaleX(' + wp.toFixed(3) + ')';
-  const wc = 'workCount', ci = Math.min(P.length, Math.round(wp * (P.length - 1)) + 1); const wce = document.getElementById(wc); if (wce.dataset.v != ci) { wce.dataset.v = ci; wce.textContent = pad2(ci) + ' / ' + pad2(P.length); }
-  track.style.transform = 'translate3d(' + drag.cur.toFixed(1) + 'px,0,0)';
-  const sk = clamp(drag.v * .12, -3, 3);
-  P.forEach(p => { p.el.querySelector('.vis').style.transform = 'skewX(' + (-sk).toFixed(2) + 'deg) scale(' + (1 - Math.min(Math.abs(drag.v) * .002, .04)).toFixed(3) + ')'; });
+  const ci = Math.min(P.length, Math.round(wp * (P.length - 1)) + 1), wce = document.getElementById('workCount');
+  if (wce.dataset.v != ci) { wce.dataset.v = ci; wce.textContent = pad2(ci) + ' / ' + pad2(P.length); }
+  track.style.transform = 'translate3d(' + pos.cur.toFixed(1) + 'px,0,0)';
+  const sk = clamp(pos.v * .12, -3, 3);
+  P.forEach(p => { p.el.querySelector('.vis').style.transform = 'skewX(' + (-sk).toFixed(2) + 'deg) scale(' + (1 - Math.min(Math.abs(pos.v) * .002, .04)).toFixed(3) + ')'; });
 }

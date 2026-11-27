@@ -23,5 +23,3 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# el index.html original, que queda sólo como referencia local
-index.html

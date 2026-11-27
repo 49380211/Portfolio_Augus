@@ -7,10 +7,23 @@ import { lenis } from './scroll.js';
 import { imgTag } from './images.js';
 
 let sheet = null, sVis = null;
-let openI = -1, run = null, origin = [50, 50];
+let openI = -1, run = null;
 const EX = { acc: 0, t: 0, closing: false };
 
 export const getOpenI = () => openI;
+
+/* Galería del caso: cada pieza es un array cuyo primer elemento dice el tipo (ver GalleryItem en projects.ts). */
+const brw = (p, src, cap, wide) => '<figure' + (wide ? ' class="wide"' : '') + ' style="margin:0"><div class="brw"><div class="bar"><i></i><i></i><i></i><span>' + (p.bar || '') + '</span></div>' + imgTag(src, cap) + '</div><figcaption>' + cap + '</figcaption></figure>';
+function galleryItem(p, g) {
+  switch (g[0]) {
+    case 'h': return '<p class="g-h">' + g[1] + '</p>';
+    case 'b': return brw(p, g[1], g[2], g[3] === 'wide');
+    case 'duo': return '<div class="duo">' + brw(p, g[1], g[2]) + '<figure style="margin:0"><div class="phone">' + imgTag(g[3], 'El sitio en el celular') + '</div><figcaption style="text-align:center">En el celular</figcaption></figure></div>';
+    case 'shot': return '<figure class="shot" style="margin:0">' + imgTag(g[1], p.name + ' en Blender, ' + g[2] + ': ' + g[3]) + '<figcaption><b>' + g[2] + '</b>' + g[3] + '</figcaption></figure>';
+    case 'chars': return '<div class="chars">' + g[1].map(c => '<figure style="margin:0">' + imgTag(c[0], 'Squeaky ' + c[1].toLowerCase()) + '<figcaption>' + c[1] + '</figcaption></figure>').join('') + '</div>';
+    default: return '';
+  }
+}
 
 export function openCase(i, e, src) {
   const p = P[i]; openI = i; p.src = src || null;
@@ -21,10 +34,8 @@ export function openCase(i, e, src) {
   document.getElementById('sRows').innerHTML = p.rows.map(r => '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join('');
   document.getElementById('sTags').innerHTML = p.tags + (p.link ? '<a class="s-link" href="' + p.link + '" target="_blank" rel="noopener">Ver el sitio ↗</a>' : '');
   sVis.innerHTML = V[p.vis].html();
-  const brw = (src, cap) => '<figure style="margin:0"><div class="brw"><div class="bar"><i></i><i></i><i></i><span>cdm · centro de medicina</span></div>' + imgTag(src, cap) + '</div><figcaption>' + cap + '</figcaption></figure>';
-  document.getElementById('sGal').innerHTML = (p.gallery || []).map(g => g[0] === 'duo' ? '<div class="duo">' + brw(g[1], g[2]) + '<figure style="margin:0"><div class="phone">' + imgTag(g[3], 'El sitio en el celular') + '</div><figcaption style="text-align:center">En el celular</figcaption></figure></div>' : brw(g[1], g[2])).join('');
+  document.getElementById('sGal').innerHTML = (p.gallery || []).map(g => galleryItem(p, g)).join('');
   const r = (p.src || p.el.querySelector('.vis')).getBoundingClientRect();
-  origin = [(r.left + r.width / 2) / vw() * 100, (r.top + r.height / 2) / vh() * 100];
   if (lenis) lenis.stop(); document.body.classList.add('lock');
   gsap.set(sheet, { visibility: 'visible' }); sheet.scrollTop = 0;
   gsap.fromTo(sheet, { clipPath: 'inset(' + r.top + 'px ' + (vw() - r.right) + 'px ' + (vh() - r.bottom) + 'px ' + r.left + 'px)' }, { clipPath: 'inset(0px 0px 0px 0px)', duration: reduce ? 0 : 1.1, ease: 'expo.inOut' });

@@ -27,9 +27,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .ul-link{position:relative;display:inline-block}
 .ul-link::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s cubic-bezier(.7,0,.2,1)}
 .ul-link:hover::after{transform:scaleX(1);transform-origin:left}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* entrada (estilo Carnilove): pantalla limpia, el nombre se acomoda, crecen lápices desde las esquinas y suben tarjetas de proyectos */
+/* entrada: pantalla limpia mientras el nombre se acomoda */
 body.loading{overflow:hidden}
 body.loading .hdr > *,body.loading .hero .tag,body.loading .hero .sub{opacity:0}
 body.loading .hero h1{visibility:hidden}

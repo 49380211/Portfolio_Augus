@@ -3,7 +3,6 @@ import { gsap } from 'gsap';
 import { lerp } from './utils.js';
 import { lenis } from './scroll.js';
 import { updateWork } from './work-carousel.js';
-import { updateMarquee } from './marquee.js';
 import { darkFrame } from './words.js';
 import { updatePill } from './pill.js';
 import { updateProcessCards } from './process-cards.js';
@@ -20,7 +19,6 @@ export function startLoop() {
     const f = { now, t, sy, sv, openI: getOpenI() };
 
     updateWork();
-    updateMarquee(f);
     darkFrame();
     updatePill(f);
     updateProcessCards();
